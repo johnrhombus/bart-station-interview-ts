@@ -1,46 +1,184 @@
-# Getting Started with Create React App
+This project was bootstrapped with [npx create-react-app my-app --template typescript](https://github.com/facebook/create-react-app).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Install and Run
 
-## Available Scripts
+To get started: 
 
-In the project directory, you can run:
+### `1) npm install`
 
-### `npm start`
+Installs dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `2) npm run serve`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+Starts a simple node server to proxy requests to BART API using the default API Key.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `3) Open a new terminal tab`
 
-### `npm run build`
+### `4) npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Launches the app at http://localhost:3000
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## `API DOCS`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `/stations`
 
-### `npm run eject`
+Returns a list of all the train stations in the BART system.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+JSON Sample
+```
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "root": {
+    "uri": {
+      "#cdata-section": "http://api.bart.gov/api/stn.aspx?cmd=stns&json=y"
+    },
+    "stations": {
+      "station": [
+        {
+          "name": "12th St. Oakland City Center",
+          "abbr": "12TH",
+          "gtfs_latitude": "37.803768",
+          "gtfs_longitude": "-122.271450",
+          "address": "1245 Broadway",
+          "city": "Oakland",
+          "county": "alameda",
+          "state": "CA",
+          "zipcode": "94612"
+        },
+        {
+          "name": "Warm Springs / South Fremont",
+          "abbr": "WARM",
+          "gtfs_latitude": "37.502171",
+          "gtfs_longitude": "-121.939313",
+          "address": "45193 Warm Springs Blvd",
+          "city": "Fremont",
+          "county": "alameda",
+          "state": "CA",
+          "zipcode": "94539"
+        }
+      ]
+    },
+    "message": ""
+  }
+}
+```
+### `/departures/${stationId}`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Returns a list of "estimated time of departure" from now, for a given station.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+JSON Sample
+```
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "root": {
+    "@id": "1",
+    "uri": {
+      "#cdata-section": "https://api.bart.gov/api/etd.aspx?cmd=etd&orig=RICH&json=y"
+    },
+    "date": "01/20/2021",
+    "time": "08:13:44 AM PDT",
+    "station": [
+      {
+        "name": "Richmond",
+        "abbr": "RICH",
+        "etd": [
+          {
+            "destination": "Fremont",
+            "abbreviation": "FRMT",
+            "limited": "0",
+            "estimate": [
+              {
+                "minutes": "1",
+                "platform": "2",
+                "direction": "South",
+                "length": "4",
+                "color": "ORANGE",
+                "hexcolor": "#ff9933",
+                "bikeflag": "1",
+                "delay": "238",
+                "cancelflag": "1",
+                "dynamicflag": "0"
+              },
+              {
+                "minutes": "13",
+                "platform": "2",
+                "direction": "South",
+                "length": "4",
+                "color": "ORANGE",
+                "hexcolor": "#ff9933",
+                "bikeflag": "1",
+                "delay": "0",
+                "cancelflag": "0",
+                "dynamicflag": "1"
+              },
+              {
+                "minutes": "28",
+                "platform": "2",
+                "direction": "South",
+                "length": "4",
+                "color": "ORANGE",
+                "hexcolor": "#ff9933",
+                "bikeflag": "1",
+                "delay": "0",
+                "cancelflag": "0",
+                "dynamicflag": "0"
+              }
+            ]
+          },
+          {
+            "destination": "Millbrae",
+            "abbreviation": "MLBR",
+            "limited": "0",
+            "estimate": [
+              {
+                "minutes": "6",
+                "platform": "2",
+                "direction": "South",
+                "length": "4",
+                "color": "RED",
+                "hexcolor": "#ff0000",
+                "bikeflag": "1",
+                "delay": "0",
+                "cancelflag": "0",
+                "dynamicflag": "0"
+              },
+              {
+                "minutes": "21",
+                "platform": "2",
+                "direction": "South",
+                "length": "5",
+                "color": "RED",
+                "hexcolor": "#ff0000",
+                "bikeflag": "1",
+                "delay": "0",
+                "cancelflag": "0",
+                "dynamicflag": "0"
+              },
+              {
+                "minutes": "36",
+                "platform": "2",
+                "direction": "South",
+                "length": "5",
+                "color": "RED",
+                "hexcolor": "#ff0000",
+                "bikeflag": "1",
+                "delay": "0",
+                "cancelflag": "0",
+                "dynamicflag": "0"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "message": ""
+  }
+}
+```
