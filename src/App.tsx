@@ -2,7 +2,23 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+interface StationsResponse {}
+
 function App() {
+
+  setTimeout(() => {
+    fetch("/stations")
+      .then((res) => res.json())
+      .then((result:StationsResponse) => {
+        // TODO:  Display each station in a list, and be able to select a station to
+        // view it's "Estimated Time of Departure(s)"
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log("Error: " + JSON.stringify(error));
+      });
+  }, 1000);
+
   return (
     <div className="App">
       <header className="App-header">
